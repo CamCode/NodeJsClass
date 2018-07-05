@@ -5,7 +5,7 @@ var object = require('../modules/objectsAndTypes');//importar librerias de CRUD
 /* GET users listing. */
 router.get('/:id', function (req, res, next) {//:id (url contiene un parametro)
 
-  /*object.get('User', req.params.id, 1, null)
+  object.get('User', req.params.id, 1, null)
     .then(response => {
       res.json({
         status: true,
@@ -18,7 +18,7 @@ router.get('/:id', function (req, res, next) {//:id (url contiene un parametro)
         status: false,
         content: response
       });
-    });*/
+    });
 
 
 });
