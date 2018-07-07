@@ -13,6 +13,21 @@ router.get('/:id', (req, res, next) => {
     });
 });
 
+/* GET users listing. */
+router.get('/:id/products', (req, res, next) => {
+    let include = {};
+
+    include.id = [{ model: models.Product, as: 'Products' }];    
+
+    object.get('Category', req.params.id, 1, include)
+        .then(response => {
+            res.json({ status: true, content: response });
+        })
+        .catch(response => {
+            res.json({ status: false, content: response });
+        });
+});
+
 router.post('/save', (req, res, next) => {
   object.save([
     'nombre',
