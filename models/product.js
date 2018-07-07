@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        categoria_id: {
+        categoria:{ 
             type: DataTypes.INTEGER,
             allowNull: false
         }
@@ -45,6 +45,13 @@ module.exports = (sequelize, DataTypes) => {
             // Set to true or a string with the attribute name you want to use to enable.
             version: true
         });
+        Product.associate = models => {
+            Product.belongsTo(models.Category, {
+                as: 'Category',
+                foreignKey: 'categoria'
+            });
+            
+        };
 
     return Product;
 };
