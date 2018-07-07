@@ -1,27 +1,19 @@
 "use strict";
 
 module.exports = (sequelize, DataTypes) => {
-    var Product = sequelize.define('Product', {
+    var Category = sequelize.define('Category', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             allowNull: false,
             primaryKey: true
         },
-        nombre: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
-        precio: {
-            type: DataTypes.INTEGER,
-            allowNull: false
-        },
         descripcion: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
         },
-        categoria_id: {
-            type: DataTypes.INTEGER,
+        nombre: {
+            type: DataTypes.STRING,
             allowNull: false
         }
     }, {
@@ -38,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
             freezeTableName: true,
 
             // define the table's name
-            tableName: 'product',
+            tableName: 'categoria',
 
             // Enable optimistic locking.  When enabled, sequelize will add a version count attribute
             // to the model and throw an OptimisticLockingError error when stale instances are saved.
@@ -46,5 +38,14 @@ module.exports = (sequelize, DataTypes) => {
             version: true
         });
 
-    return Product;
+      
+        Category.associate = models => {
+            Category.hasMany(models.Product, {
+                as: 'Product',
+                foreignKey: 'categoria'
+            });
+            
+        };
+
+    return Category;
 };
